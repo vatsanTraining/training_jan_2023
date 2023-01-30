@@ -1,0 +1,17 @@
+1) Create a Spring Boot Starter Project
+2) Add Web,Actuator and Eureka Server as Dependency
+3) Add @EnableEurekaServer Annotation to Java Class with @SpringBootApplication
+4) Update the application.properties file with following entries
+server:
+  port: 8761
+
+spring:
+  application:
+    name: eureka-server-registry
+eureka:
+  client:
+    fetch-registry: false
+    register-with-eureka: false
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+

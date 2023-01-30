@@ -1,0 +1,42 @@
+spring:
+  application:
+    name: Image Processing
+  
+  datasource:
+    password: srivatsan
+    url: jdbc:mysql://localhost:3306/test
+    username: root
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update  
+
+info:
+  app:
+    name: ${spring.application.name}
+  build:
+    artifactId:@project.artifactId@
+    groupId:@project.groupId@
+  java:
+    version:@java.version@    
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+        - "*"
+  info:
+    env:
+      enabled: true
+      
+  endpoint:
+    shutdown:
+      enabled: true      
+logging:
+  level:
+    '[org.springframework]': info
+
+
+server:
+  port: 5050

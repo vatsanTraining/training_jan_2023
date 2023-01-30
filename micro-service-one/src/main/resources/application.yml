@@ -1,0 +1,42 @@
+server:
+  port: 7070
+  ssl:
+    enabled: true
+    key-alias: localhost_ssl
+    key-store-password: password
+    key-store: classpath:localhost-ssl.p12
+    key-store-type: PKCS12 
+    
+    
+spring:
+  application:
+    name: service-one
+  config:
+    import: configserver:http://localhost:8888
+
+info:
+  app:
+    name: ${spring.application.name}
+  build:
+    artifactId:@project.artifactId@
+    groupId:@project.groupId@
+  java:
+    version:@java.version@    
+  
+
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka    
+      
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+        - "*"     
+
+           

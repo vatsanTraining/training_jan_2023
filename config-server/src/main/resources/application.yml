@@ -1,0 +1,21 @@
+   
+server:
+  port: 8888
+
+spring:
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/vatsanTraining/bajaj_training.git
+          search-paths:
+          - '{application}'
+          default-label: 'master'
+          
+          
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+        - "*"          

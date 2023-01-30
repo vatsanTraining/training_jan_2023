@@ -1,34 +1,36 @@
 package com.example.demo;
 
+import org.apache.http.HttpResponse;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.gateway.route.RouteLocator;
-import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
+import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.context.annotation.Bean;
 
+import lombok.extern.log4j.Log4j2;
+import reactor.core.publisher.Mono;
+
 @SpringBootApplication
+@Log4j2
 public class ApiGatewayApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ApiGatewayApplication.class, args);
 	}
-	
-    @Bean
-    public RouteLocator routes(RouteLocatorBuilder builder) {
-        return builder.routes()
-                .route(p -> p.path("/api/v1/loanapplications/**")
-                        .uri("https://localhost:7070/"))
-                .build();
-    }
 
-
+	@Bean
+	public GlobalFilter postFilter() {
+		
+		
+		   return (exchange, chain) -> {
+	            return chain.filter(exchange)
+	              .then(Mono.fromRunnable(() -> {
+	                  log.info("Global Post Filter executed");
+	                  exchange.getResponse().getHeaders().add("author", "bfl-byte");
+	                  HttpResponse resp = (HttpResponse)exchange.getResponse();
+	                  log.info(resp.getEntity().toString());
+	                  exchange.getResponse().setRawStatusCode(209);
+	              }));
+	      
+	      };
+	}
 }
-
-
-//// ...
-//public void doSomeWorkNewSpan() throws InterruptedException {
-//
-//
-//    logger.info("I'm in the original span");
-//}
-

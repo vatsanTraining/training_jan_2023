@@ -1,27 +1,22 @@
-server:
-  port: 8080
-  ssl:
-    enabled: true
-    key-alias: localhost_ssl
-    key-store-password: password
-    key-store: classpath:localhost-ssl.p12
-    key-store-type: PKCS12 
-  
 spring:
   application:
-    name: api-gateway
-  
+    name: gateway-service
     
   cloud:
     gateway:
-      httpclient:
-        ssl:
-          use-insecure-trust-manager: true
-          
+      routes:
+      - id: employee-service
+        uri: http://localhost:3030/
+        predicates:
+        - Path= /api/v1/employees/**
+      - id: score-service
+        uri: lb://SCORE-SERVICE 
+        predicates: 
+        - Path= /api/v1/scores/** 
+
 management:
   endpoints:
     web:
       exposure:
         include:
-        - "*"          
-      
+        - "*"                

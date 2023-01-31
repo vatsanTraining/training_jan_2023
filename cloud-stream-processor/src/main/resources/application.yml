@@ -1,0 +1,16 @@
+spring:
+  cloud:
+    function:
+      definition: processStudent 
+    stream:
+      bindings:
+        processStudent-in-0:
+          destination: student-topic
+
+  kafka:
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.IntegerSerializer
+          
+server:
+  port: 6065          
+ 

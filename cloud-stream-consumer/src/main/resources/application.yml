@@ -1,0 +1,13 @@
+server:
+  port: 6070
+
+spring:
+  cloud:
+    function:
+      definition: consumer
+    stream:
+       function:
+    
+        bindings:
+          consumer-in-0:
+            destination: pass-topic 

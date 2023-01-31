@@ -4,7 +4,14 @@ server:
 spring:
   application:
     name: service-two
-  
+
+logging:
+  file:
+    name: e:\logs\service.log 
+  level:
+    '[org.springframework.boot]': off  
+    '[org.hibernate]': off
+    '[com.netflix]': off
 info:
   app:
     name: ${spring.application.name}

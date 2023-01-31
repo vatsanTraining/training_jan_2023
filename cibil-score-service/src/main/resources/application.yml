@@ -6,8 +6,20 @@ spring:
     name: score-service
   config:
     import: configserver:http://localhost:8888
+  zipkin:
+    enabled: true
 
-  
+
+
+logging:
+  file:
+    name: e:\logs\score.log
+  level:
+     '[org.springframework]': off
+     '[com.example]': info
+     '[org.hibernate]': off
+     '[com.nextflix]': off
+     
 
 eureka:
   client:

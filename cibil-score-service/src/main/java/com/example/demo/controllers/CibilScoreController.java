@@ -27,16 +27,23 @@ public class CibilScoreController {
 	public CibilScore getScoreByPan(@PathVariable("panNumber") String panNumber) {
 		
 
-    Span newSpan = tracer.nextSpan().name("newSpan").start();
 
     log.info("I'm in the Controller");
 
 		return this.service.findById(panNumber);
 		
 	}
+   
 	
+}
+	
+	
+	
+	
+	// Span newSpan = tracer.nextSpan().name("newSpan").start();
+
     //Span span = tracer.newTrace().name("encode").start();
 //span.tag("clnt/finagle.version", "6.36.0");
 //spring.zipkin.baseUrl: https://zipkinserver/
 
-}
+//}
